@@ -4,7 +4,7 @@
 
 ## Test environments
 
-* Local macOS (Apple Silicon), R 4.4.x
+* Local macOS (Apple Silicon), R 4.5.2
 * GitHub Actions: ubuntu-latest (R release, R devel), macOS-latest (R release), windows-latest (R release)
 
 ## Package description

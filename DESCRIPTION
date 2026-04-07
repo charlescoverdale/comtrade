@@ -9,8 +9,9 @@ Description: Download and analyse international merchandise and services trade
     trade analytics (revealed comparative advantage, trade concentration,
     trade balance), and convert between commodity classifications (HS, SITC,
     BEC). Covers 200+ reporter countries, 60+ years of goods trade data
-    (1962-present), and services trade via EBOPS. Requires a free API key
-    from <https://comtradedeveloper.un.org/>.
+    (1962-present), and services trade via EBOPS. Works without
+    registration for basic queries. A free API key from
+    <https://comtradedeveloper.un.org/> unlocks full access.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en-GB
