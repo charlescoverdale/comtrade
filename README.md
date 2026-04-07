@@ -1,6 +1,35 @@
 # comtrade
+[![CRAN status](https://www.r-pkg.org/badges/version/comtrade)](https://CRAN.R-project.org/package=comtrade) [![CRAN downloads](https://cranlogs.r-pkg.org/badges/comtrade)](https://CRAN.R-project.org/package=comtrade) [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-Access and analyse UN Comtrade international trade data from R.
+**comtrade** provides clean, tidy access to international trade data from the [United Nations Comtrade](https://comtradeplus.un.org/) database directly from R, plus built-in trade analytics (RCA, HHI, trade balance, growth rates, concordance).
+
+## What is UN Comtrade?
+
+The [United Nations Comtrade](https://comtradeplus.un.org/) database is the largest repository of international merchandise trade statistics in the world. Over 200 countries and territories report their annual and monthly trade data to the UN Statistics Division, which standardises, validates, and publishes it in a consistent format. The database covers goods trade from 1962 to the present and services trade from 2000, with commodity detail down to the 6-digit Harmonized System (HS) level.
+
+Comtrade is the standard data source for bilateral trade flow analysis, gravity models, revealed comparative advantage, trade policy evaluation, and supply chain research. It underpins publications from the World Bank, WTO, UNCTAD, and most academic trade economics research.
+
+The data is accessible via the [Comtrade Plus API](https://comtradedeveloper.un.org/), which replaced the legacy API in 2023. The free tier allows 500 API calls per day with up to 100,000 records per call. Registration is free.
+
+## How is this different from comtradr?
+
+There is an existing R package called [comtradr](https://cran.r-project.org/package=comtradr), maintained by Paul Bochtler through rOpenSci. It's a well-maintained package (v1.0.5, December 2025) that wraps the same Comtrade Plus API.
+
+**What comtrade adds:**
+
+- **Built-in trade analytics**: comtradr is a data pipe only. To compute RCA, HHI, trade balance, or growth rates, you need additional packages (economiccomplexity, concordance) or manual code. comtrade includes `ct_rca()`, `ct_hhi()`, `ct_balance()`, `ct_growth()`, `ct_share()`, and `ct_compare()` out of the box.
+- **Classification concordance**: `ct_concordance()` converts between HS, SITC, and BEC classifications with a built-in lookup table. No separate package needed.
+- **Fewer dependencies**: comtrade depends on 3 packages (cli, httr2, tools). comtradr depends on 14 (including lubridate, purrr, poorman, stringr, readr, fs, rappdirs, memoise, cachem, lifecycle, askpass).
+- **CRAN-safe caching**: uses `tools::R_user_dir()` instead of `rappdirs`.
+- **Returns data.frames**: not tibbles. Consistent with base R workflows.
+
+**What comtradr does better:**
+
+- **Bulk download**: comtradr supports the premium bulk download endpoint. comtrade does not (free tier only).
+- **Broader classification support**: comtradr supports all HS revisions individually. comtrade uses the API's automatic classification mapping.
+- **rOpenSci peer review**: comtradr has been through formal peer review.
+
+If you need bulk downloads or the full rOpenSci ecosystem, use comtradr. If you want lightweight data access with built-in analytics and minimal dependencies, use comtrade.
 
 ## Installation
 
@@ -21,6 +50,8 @@ Get a free API key at [comtradedeveloper.un.org](https://comtradedeveloper.un.or
 library(comtrade)
 ct_set_key("your-subscription-key")
 ```
+
+The key is stored for the current session. To make it permanent, add `COMTRADE_API_KEY=your-key` to your `.Renviron` file.
 
 ## Quick start
 
@@ -84,19 +115,43 @@ ct_concordance("27", from = "HS", to = "SITC")
 | `ct_set_key()` | Store API key |
 | `ct_cache_clear()` | Clear cached responses |
 
+## Caching
+
+Results are cached locally after the first download so repeated calls are instant and don't touch the API. The cache directory defaults to `tools::R_user_dir("comtrade", "cache")` and can be overridden with `options(comtrade.cache_dir = "/your/path")`. Cache entries expire after 24 hours for trade data and 7 days for reference tables.
+
+To clear the cache:
+
+```r
+ct_cache_clear()
+```
+
 ## Data source
 
-All data comes from the [United Nations Comtrade](https://comtradeplus.un.org/) database via the Comtrade Plus API. The free tier allows 500 API calls per day with up to 100,000 records per call.
+All data comes from the [United Nations Comtrade](https://comtradeplus.un.org/) database via the [Comtrade Plus API](https://comtradeapi.un.org/). This package is not affiliated with or endorsed by the United Nations.
 
 ## Related packages
 
 Part of a suite of R packages for economic data and analysis:
 
-- [ons](https://github.com/charlescoverdale/ons): UK Office for National Statistics
-- [boe](https://github.com/charlescoverdale/boe): Bank of England
-- [fred](https://github.com/charlescoverdale/fred): US Federal Reserve (FRED)
-- [readecb](https://github.com/charlescoverdale/readecb): European Central Bank
-- [readoecd](https://github.com/charlescoverdale/readoecd): OECD
+| Package | Source |
+|---|---|
+| [ons](https://github.com/charlescoverdale/ons) | UK Office for National Statistics |
+| [boe](https://github.com/charlescoverdale/boe) | Bank of England |
+| [hmrc](https://github.com/charlescoverdale/hmrc) | HM Revenue and Customs |
+| [obr](https://github.com/charlescoverdale/obr) | Office for Budget Responsibility |
+| [fred](https://github.com/charlescoverdale/fred) | US Federal Reserve (FRED) |
+| [readecb](https://github.com/charlescoverdale/readecb) | European Central Bank |
+| [readoecd](https://github.com/charlescoverdale/readoecd) | OECD |
+| [readnoaa](https://github.com/charlescoverdale/readnoaa) | NOAA Climate Data |
+| [readaec](https://github.com/charlescoverdale/readaec) | Australian Electoral Commission |
+
+## Issues
+
+Found a bug or have a feature request? Open an issue at [github.com/charlescoverdale/comtrade/issues](https://github.com/charlescoverdale/comtrade/issues).
+
+## Keywords
+
+trade, international trade, comtrade, UN, bilateral, exports, imports, HS, SITC, BEC, RCA, HHI, trade balance, gravity model, comparative advantage
 
 ## License
 
