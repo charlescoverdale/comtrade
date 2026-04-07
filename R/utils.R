@@ -73,11 +73,16 @@ ct_cache_write <- function(key, data) {
 ct_request <- function(endpoint, params = list(), require_key = TRUE) {
   key <- ct_get_key()
   if (require_key && is.null(key)) {
-    cli::cli_abort(c(
-      "Comtrade API key not found.",
-      "i" = "Get a free key at {.url https://comtradedeveloper.un.org/}",
+    cli::cli_inform(c(
+      "i" = "No API key set. Using preview endpoint (500 records max, no descriptions).",
+      "i" = "For full access (100k records, descriptions), get a free key at {.url https://comtradedeveloper.un.org/}",
       "i" = "Then run: {.code ct_set_key(\"your-key\")}"
     ))
+  }
+
+  # If no key and endpoint requires one, fall back to preview endpoint
+  if (require_key && is.null(key)) {
+    endpoint <- sub("^data/v1/get/", "public/v1/preview/", endpoint)
   }
 
   url <- paste0(ct_base_url(), "/", endpoint)
