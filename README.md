@@ -1,5 +1,5 @@
 # comtrade
-[![CRAN status](https://www.r-pkg.org/badges/version/comtrade)](https://CRAN.R-project.org/package=comtrade) [![CRAN downloads](https://cranlogs.r-pkg.org/badges/comtrade)](https://CRAN.R-project.org/package=comtrade) [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![CRAN status](https://www.r-pkg.org/badges/version/comtrade)](https://CRAN.R-project.org/package=comtrade) [![CRAN downloads](https://cranlogs.r-pkg.org/badges/comtrade)](https://CRAN.R-project.org/package=comtrade) [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/comtrade)](https://CRAN.R-project.org/package=comtrade) [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 **comtrade** provides clean, tidy access to international trade data from the [United Nations Comtrade](https://comtradeplus.un.org/) database directly from R, plus built-in trade analytics (RCA, HHI, trade balance, growth rates, concordance).
 
