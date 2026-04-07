@@ -23,13 +23,6 @@ There is an existing R package called [comtradr](https://cran.r-project.org/pack
 - **CRAN-safe caching**: uses `tools::R_user_dir()` instead of `rappdirs`.
 - **Returns data.frames**: not tibbles. Consistent with base R workflows.
 
-**What comtradr does better:**
-
-- **Bulk download**: comtradr supports the premium bulk download endpoint. comtrade does not (free tier only).
-- **Broader classification support**: comtradr supports all HS revisions individually. comtrade uses the API's automatic classification mapping.
-- **rOpenSci peer review**: comtradr has been through formal peer review.
-
-If you need bulk downloads or the full rOpenSci ecosystem, use comtradr. If you want lightweight data access with built-in analytics and minimal dependencies, use comtrade.
 
 ## Installation
 
