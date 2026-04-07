@@ -45,7 +45,7 @@ ct_set_key("your-subscription-key")
 #> Comtrade API key set for this session.
 ```
 
-To make it permanent, add `COMTRADE_API_KEY=your-key` to your `.Renviron` file.
+To make it permanent so you don't have to set it every session, add it to your `.Renviron` file. Run `file.edit("~/.Renviron")` in R, add the line `COMTRADE_API_KEY=your-key`, save, and restart R. The package will pick it up automatically from then on.
 
 ## Examples
 
