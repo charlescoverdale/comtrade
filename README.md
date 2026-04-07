@@ -31,8 +31,8 @@ There is an existing R package called [comtradr](https://cran.r-project.org/pack
 install.packages("comtrade")
 
 # From GitHub
-# install.packages("pak")
-pak::pak("charlescoverdale/comtrade")
+# install.packages("devtools")
+devtools::install_github("charlescoverdale/comtrade")
 ```
 
 ## Setup
