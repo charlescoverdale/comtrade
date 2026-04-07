@@ -9,9 +9,9 @@
 
 ## Package description
 
-comtrade provides access to the UN Comtrade international trade database via the Comtrade Plus API. It wraps the official API at <https://comtradeapi.un.org/> with a lightweight R interface (3 dependencies: cli, httr2, tools) and adds trade analytics (RCA, HHI, trade balance, growth) that would otherwise require multiple separate packages.
+comtrade provides access to the UN Comtrade international trade database via the Comtrade Plus API. It wraps the official API at <https://comtradeapi.un.org/> with a lightweight R interface and adds trade analytics (RCA, HHI, trade balance, growth) that would otherwise require multiple separate packages. 16 exported functions, 5 dependencies (cli, httr2, stats, tools, utils).
 
-A free API key is required (available at <https://comtradedeveloper.un.org/>). All examples use \donttest{} and redirect cache to tempdir().
+Basic queries work without an API key (via the public preview endpoint). For full access, a free key is available at <https://comtradedeveloper.un.org/>. All network-dependent examples use \donttest{} and redirect cache to tempdir().
 
 ## First submission
 

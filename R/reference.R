@@ -187,6 +187,7 @@ ct_resolve_country <- function(x) {
     if (nrow(match_row) > 0L) return(as.character(match_row$code[1]))
   }
   if (grepl("^[0-9]+$", x)) return(x)
+  cli::cli_warn("Country code {.val {x}} not found in reference table. Passing to API as-is.")
   x
 }
 
