@@ -6,7 +6,7 @@
 \alias{comtrade-package}
 \title{comtrade: Access and Analyse UN Comtrade International Trade Data}
 \description{
-Download and analyse international merchandise and services trade data from the United Nations Comtrade database \url{https://comtradeplus.un.org/}. Retrieve bilateral trade flows, compute trade analytics (revealed comparative advantage, trade concentration, trade balance), and convert between commodity classifications (HS, SITC, BEC). Covers 200+ reporter countries, 60+ years of goods trade data (1962-present), and services trade via EBOPS. Requires a free API key from \url{https://comtradedeveloper.un.org/}.
+Download and analyse international merchandise and services trade data from the United Nations Comtrade database \url{https://comtradeplus.un.org/}. Retrieve bilateral trade flows, compute trade analytics (revealed comparative advantage, trade concentration, trade balance), and convert between commodity classifications (HS, SITC, BEC). Covers 200+ reporter countries, 60+ years of goods trade data (1962-present), and services trade via EBOPS. Works without registration for basic queries. A free API key from \url{https://comtradedeveloper.un.org/} unlocks full access.
 }
 \seealso{
 Useful links:
