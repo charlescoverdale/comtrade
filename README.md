@@ -171,6 +171,15 @@ ct_concordance("27", from = "HS", to = "SITC")
 
 Results are cached locally after the first download so repeated calls are instant and don't touch the API. The cache directory defaults to `tools::R_user_dir("comtrade", "cache")` and can be overridden with `options(comtrade.cache_dir = "/your/path")`. Cache entries expire after 24 hours for trade data and 7 days for reference tables.
 
+## Related packages
+
+| Package | What it covers |
+|---|---|
+| [`ons`](https://github.com/charlescoverdale/ons) | UK trade flows (goods exports and imports, current account) |
+| [`hmrc`](https://github.com/charlescoverdale/hmrc) | UK customs duties and trade tax data |
+| [`readoecd`](https://github.com/charlescoverdale/readoecd) | OECD bilateral trade and trade in value added (TiVA) |
+| [`readecb`](https://github.com/charlescoverdale/readecb) | Euro area trade balance and external sector statistics |
+
 ## Data source
 
 All data comes from the [United Nations Comtrade](https://comtradeplus.un.org/) database via the [Comtrade Plus API](https://comtradeapi.un.org/). This package is not affiliated with or endorsed by the United Nations.
