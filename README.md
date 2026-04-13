@@ -25,10 +25,10 @@ There is an existing R package called [comtradr](https://cran.r-project.org/pack
 ## Installation
 
 ```r
-# From CRAN (when available)
+# From CRAN
 install.packages("comtrade")
 
-# From GitHub
+# Development version from GitHub
 # install.packages("devtools")
 devtools::install_github("charlescoverdale/comtrade")
 ```

@@ -1,16 +1,19 @@
 Package: comtrade
 Title: Access and Analyse UN Comtrade International Trade Data
-Version: 0.1.0
+Version: 0.1.1
 Authors@R:
     person("Charles", "Coverdale", , "charlesfcoverdale@gmail.com", role = c("aut", "cre"))
 Description: Download and analyse international merchandise and services trade
     data from the United Nations Comtrade database
     <https://comtradeplus.un.org/>. Retrieve bilateral trade flows, compute
     trade analytics (revealed comparative advantage, trade concentration,
-    trade balance), and convert between commodity classifications (HS, SITC,
-    BEC). Covers 200+ reporter countries, 60+ years of goods trade data
-    (1962-present), and services trade via EBOPS. Works without
-    registration for basic queries. A free API key from
+    trade balance), and convert between commodity classifications
+    (Harmonised System 'HS', Standard International Trade Classification
+    'SITC', Broad Economic Categories 'BEC'). Covers 200+ reporter
+    countries, 60+ years of goods trade data (1962-present), and services
+    trade via Extended Balance of Payments Services ('EBOPS'). Works
+    without registration for basic queries. A free Application Programming
+    Interface ('API') key from
     <https://comtradedeveloper.un.org/> unlocks full access.
 License: MIT + file LICENSE
 Encoding: UTF-8

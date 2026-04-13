@@ -1,3 +1,7 @@
+# comtrade 0.1.1
+
+* Expanded all acronyms in DESCRIPTION (HS, SITC, BEC, EBOPS, API) per CRAN reviewer feedback.
+
 # comtrade 0.1.0
 
 * Initial CRAN release.
