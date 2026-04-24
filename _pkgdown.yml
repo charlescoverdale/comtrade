@@ -1,0 +1,39 @@
+url: https://charlescoverdale.github.io/comtrade/
+
+template:
+  bootstrap: 5
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, news]
+    right: [search, github]
+
+reference:
+  - title: "Data Access"
+    desc: "Fetch trade flows from the UN Comtrade API"
+    contents:
+      - ct_trade
+      - ct_services
+      - ct_reporters
+      - ct_commodities
+      - ct_set_key
+      - ct_available
+
+  - title: "Analysis"
+    desc: "Trade indicators and market structure"
+    contents:
+      - ct_rca
+      - ct_hhi
+      - ct_balance
+      - ct_growth
+      - ct_share
+      - ct_top_partners
+      - ct_top_products
+      - ct_compare
+      - ct_concordance
+
+  - title: "Utilities"
+    desc: "Cache management"
+    contents:
+      - ct_cache_clear
+

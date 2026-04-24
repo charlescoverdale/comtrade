@@ -1,0 +1,31 @@
+# comtrade
+
+> Download and analyse international merchandise and services trade data from the United Nations Comtrade database. Install with `install.packages("comtrade")`.
+
+Version: 0.1.1. License: MIT.
+
+## Functions
+
+- [`ct_available()`](https://charlescoverdale.github.io/comtrade/reference/ct_available.html): Check Data Availability
+- [`ct_balance()`](https://charlescoverdale.github.io/comtrade/reference/ct_balance.html): Trade Balance by Partner
+- [`ct_cache_clear()`](https://charlescoverdale.github.io/comtrade/reference/ct_cache_clear.html): Clear the Comtrade Cache
+- [`ct_commodities()`](https://charlescoverdale.github.io/comtrade/reference/ct_commodities.html): Search Commodity Codes
+- [`ct_compare()`](https://charlescoverdale.github.io/comtrade/reference/ct_compare.html): Compare Countries
+- [`ct_concordance()`](https://charlescoverdale.github.io/comtrade/reference/ct_concordance.html): Convert Between Trade Classifications
+- [`ct_growth()`](https://charlescoverdale.github.io/comtrade/reference/ct_growth.html): Trade Growth Over Time
+- [`ct_hhi()`](https://charlescoverdale.github.io/comtrade/reference/ct_hhi.html): Trade Concentration Index (HHI)
+- [`ct_rca()`](https://charlescoverdale.github.io/comtrade/reference/ct_rca.html): Revealed Comparative Advantage (Balassa Index)
+- [`ct_reporters()`](https://charlescoverdale.github.io/comtrade/reference/ct_reporters.html): List Reporter Countries
+- [`ct_services()`](https://charlescoverdale.github.io/comtrade/reference/ct_services.html): Get Services Trade Data
+- [`ct_set_key()`](https://charlescoverdale.github.io/comtrade/reference/ct_set_key.html): Set the Comtrade API Key
+- [`ct_share()`](https://charlescoverdale.github.io/comtrade/reference/ct_share.html): World Trade Share
+- [`ct_top_partners()`](https://charlescoverdale.github.io/comtrade/reference/ct_top_partners.html): Top Trading Partners
+- [`ct_top_products()`](https://charlescoverdale.github.io/comtrade/reference/ct_top_products.html): Top Export or Import Products
+- [`ct_trade()`](https://charlescoverdale.github.io/comtrade/reference/ct_trade.html): Get Bilateral Trade Data
+
+## Documentation
+
+- [Full reference](https://charlescoverdale.github.io/comtrade/reference/)
+- [GitHub](https://github.com/charlescoverdale/comtrade)
+- [CRAN](https://CRAN.R-project.org/package=comtrade)
+
