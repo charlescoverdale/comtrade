@@ -37,3 +37,7 @@ reference:
     contents:
       - ct_cache_clear
 
+
+  - title: "Package"
+    contents:
+      - comtrade-package
