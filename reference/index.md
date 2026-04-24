@@ -46,3 +46,9 @@ Cache management
 
 - [`ct_cache_clear()`](https://charlescoverdale.github.io/comtrade/reference/ct_cache_clear.md)
   : Clear the Comtrade Cache
+
+## Package
+
+- [`comtrade`](https://charlescoverdale.github.io/comtrade/reference/comtrade-package.md)
+  [`comtrade-package`](https://charlescoverdale.github.io/comtrade/reference/comtrade-package.md)
+  : comtrade: Access and Analyse UN Comtrade International Trade Data
