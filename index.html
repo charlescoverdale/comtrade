@@ -94,7 +94,7 @@
 <p><strong>Basic queries work without a key.</strong> The package automatically falls back to the Comtrade preview endpoint, which returns up to 500 records per call without registration.</p>
 <p>For full access (100,000 records per call, commodity descriptions, detailed partner breakdowns), register for a free key at <a href="https://comtradedeveloper.un.org/" class="external-link">comtradedeveloper.un.org</a> (500 calls/day, no cost):</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/charlescoverdale/comtrade" class="external-link">comtrade</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://charlescoverdale.github.io/comtrade/">comtrade</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/ct_set_key.html">ct_set_key</a></span><span class="op">(</span><span class="st">"your-subscription-key"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Comtrade API key set for this session.</span></span></code></pre></div>
 <p>To make it permanent so you don’t have to set it every session, add it to your <code>.Renviron</code> file. Run <code>file.edit("~/.Renviron")</code> in R, add the line <code>COMTRADE_API_KEY=your-key</code>, save, and restart R. The package will pick it up automatically from then on.</p>
@@ -106,7 +106,7 @@
 <h3 id="bilateral-trade-flows">Bilateral trade flows<a class="anchor" aria-label="anchor" href="#bilateral-trade-flows"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/charlescoverdale/comtrade" class="external-link">comtrade</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://charlescoverdale.github.io/comtrade/">comtrade</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># UK total exports to the world, 2023</span></span>
 <span><span class="va">uk</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ct_trade.html">ct_trade</a></span><span class="op">(</span><span class="st">"GBR"</span>, flow <span class="op">=</span> <span class="st">"X"</span>, year <span class="op">=</span> <span class="fl">2023</span><span class="op">)</span></span>
