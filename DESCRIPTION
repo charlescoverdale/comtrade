@@ -18,7 +18,7 @@ Description: Download and analyse international merchandise and services trade
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en-GB
-URL: https://github.com/charlescoverdale/comtrade
+URL: https://charlescoverdale.github.io/comtrade/, https://github.com/charlescoverdale/comtrade
 BugReports: https://github.com/charlescoverdale/comtrade/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
