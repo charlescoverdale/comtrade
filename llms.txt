@@ -2,6 +2,8 @@
 
 > Download and analyse international merchandise and services trade data from the United Nations Comtrade database. Install with `install.packages("comtrade")`.
 
+Full API reference (for agents): https://raw.githubusercontent.com/charlescoverdale/comtrade/main/llms-full.txt
+
 Version: 0.1.1. License: MIT.
 
 ## Functions

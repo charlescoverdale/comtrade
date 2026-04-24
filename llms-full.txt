@@ -1,0 +1,611 @@
+# comtrade — full API reference
+
+> Download and analyse international merchandise and services trade data from the United Nations Comtrade database.
+
+- Version: 0.1.1
+- Install: `install.packages("comtrade")`
+- CRAN: https://CRAN.R-project.org/package=comtrade
+- GitHub: https://github.com/charlescoverdale/comtrade
+- Reference site: https://charlescoverdale.github.io/comtrade/
+
+This file is a self-contained reference for LLM agents: every exported
+function with its signature, arguments, return value, and example.
+
+---
+
+## `ct_available()`
+
+**Check Data Availability**
+
+Check which years and classifications have data available for a given reporter country.
+
+**Usage**
+
+```r
+ct_available(reporter, cache = TRUE)
+```
+
+**Arguments**
+
+- `reporter` — Character. Reporter country ISO3 code.
+- `cache` — Logical. Cache results. Default `TRUE`.
+
+**Returns**
+
+A data.frame with columns: year, classification, type (C/S), frequency (A/M).
+
+**Example**
+
+```r
+op <- options(comtrade.cache_dir = tempdir())
+ct_available("GBR")
+options(op)
+```
+
+---
+
+## `ct_balance()`
+
+**Trade Balance by Partner**
+
+Compute the trade balance (exports minus imports) for a reporter country against each trading partner.
+
+**Usage**
+
+```r
+ct_balance(
+  reporter,
+  partner = "0",
+  year = NULL,
+  commodity = "TOTAL",
+  cache = TRUE
+)
+```
+
+**Arguments**
+
+- `reporter` — Character. Reporter country ISO3 code.
+- `partner` — Character. Partner country code, or `"0"` for World. Default `"0"`.
+- `year` — Integer. Year(s) to query.
+- `commodity` — Character. Commodity code. Default `"TOTAL"`.
+- `cache` — Logical. Default `TRUE`.
+
+**Returns**
+
+A data.frame with columns: partner, partner_desc, year, exports, imports, balance.
+
+**Example**
+
+```r
+op <- options(comtrade.cache_dir = tempdir())
+ct_balance("GBR", year = 2023)
+options(op)
+```
+
+---
+
+## `ct_cache_clear()`
+
+**Clear the Comtrade Cache**
+
+Remove all cached Comtrade API responses from the local cache directory.
+
+**Usage**
+
+```r
+ct_cache_clear()
+```
+
+**Returns**
+
+Invisibly returns `TRUE` if the cache was cleared, `FALSE` if no cache directory existed.
+
+**Example**
+
+```r
+op <- options(comtrade.cache_dir = tempdir())
+ct_cache_clear()
+options(op)
+```
+
+---
+
+## `ct_commodities()`
+
+**Search Commodity Codes**
+
+Search the HS (Harmonized System) commodity classification for codes matching a keyword or code pattern. Uses a built-in table of 96 two-digit HS chapters with descriptions.
+
+**Usage**
+
+```r
+ct_commodities(query = NULL, level = NULL)
+```
+
+**Arguments**
+
+- `query` — Character. Search term (matched against commodity descriptions) or a partial HS code (e.g., `"27"` for mineral fuels). Default `NULL` (return all).
+- `level` — Integer. HS digit level to return. Currently only level 2 is available from the built-in table. Default `NULL` (all levels).
+
+**Returns**
+
+A data.frame with columns: codeHS 2-digit chapter code descriptionChapter description levelDigit level (always 2 for built-in table) parentParent code (NA for 2-digit chapters)
+
+**Example**
+
+```r
+# Search for petroleum-related codes
+ct_commodities("petroleum")
+
+# List all 2-digit HS chapters
+ct_commodities()
+
+# Find codes starting with "27" (mineral fuels)
+ct_commodities("27")
+```
+
+---
+
+## `ct_compare()`
+
+**Compare Countries**
+
+Compare multiple countries' trade in a given commodity, showing exports, imports, balance, and revealed comparative advantage.
+
+**Usage**
+
+```r
+ct_compare(reporters, commodity = "TOTAL", year = NULL, cache = TRUE)
+```
+
+**Arguments**
+
+- `reporters` — Character vector. ISO3 codes for countries to compare.
+- `commodity` — Character. Commodity code. Default `"TOTAL"`.
+- `year` — Integer. Year to query.
+- `cache` — Logical. Default `TRUE`.
+
+**Returns**
+
+A data.frame with columns: reporter, reporter_desc, exports, imports, balance, rca.
+
+**Example**
+
+```r
+op <- options(comtrade.cache_dir = tempdir())
+ct_compare(c("GBR", "DEU", "FRA"), commodity = "87", year = 2023)
+options(op)
+```
+
+---
+
+## `ct_concordance()`
+
+**Convert Between Trade Classifications**
+
+Convert commodity codes between HS (Harmonized System), SITC, and BEC classifications. Uses a built-in concordance table covering the most common 2-digit HS chapters mapped to SITC sections and BEC categories.
+
+**Usage**
+
+```r
+ct_concordance(code, from = "HS", to = "SITC")
+```
+
+**Arguments**
+
+- `code` — Character. The commodity code(s) to convert.
+- `from` — Character. Source classification: `"HS"`, `"SITC"`, or `"BEC"`.
+- `to` — Character. Target classification: `"HS"`, `"SITC"`, or `"BEC"`.
+
+**Returns**
+
+A data.frame with columns: from_code, from_desc, to_code, to_desc.
+
+**Example**
+
+```r
+# Convert HS chapter 27 (mineral fuels) to SITC
+ct_concordance("27", from = "HS", to = "SITC")
+
+# Convert SITC section 0 (food) to HS
+ct_concordance("0", from = "SITC", to = "HS")
+```
+
+---
+
+## `ct_growth()`
+
+**Trade Growth Over Time**
+
+Compute year-on-year and cumulative trade growth for a bilateral flow.
+
+**Usage**
+
+```r
+ct_growth(
+  reporter,
+  partner = "0",
+  commodity = "TOTAL",
+  flow = "X",
+  years = NULL,
+  cache = TRUE
+)
+```
+
+**Arguments**
+
+- `reporter` — Character. Reporter country ISO3 code.
+- `partner` — Character. Partner country code. Default `"0"` (World).
+- `commodity` — Character. Commodity code. Default `"TOTAL"`.
+- `flow` — Character. `"X"` or `"M"`. Default `"X"`.
+- `years` — Integer vector. Years to query (at least 2).
+- `cache` — Logical. Default `TRUE`.
+
+**Returns**
+
+A data.frame with columns: year, value, growth_yoy, growth_cumulative, index_100.
+
+**Example**
+
+```r
+op <- options(comtrade.cache_dir = tempdir())
+ct_growth("GBR", flow = "X", years = 2018:2023)
+options(op)
+```
+
+---
+
+## `ct_hhi()`
+
+**Trade Concentration Index (HHI)**
+
+Compute the Herfindahl-Hirschman Index measuring the concentration of a country's trade across partners or products.
+
+**Usage**
+
+```r
+ct_hhi(
+  reporter,
+  flow = "X",
+  year = NULL,
+  by = "partner",
+  level = 2L,
+  cache = TRUE
+)
+```
+
+**Arguments**
+
+- `reporter` — Character. Reporter country ISO3 code.
+- `flow` — Character. `"X"` or `"M"`. Default `"X"`.
+- `year` — Integer. Year to query.
+- `by` — Character. Concentrate by `"partner"` or `"product"`. Default `"partner"`.
+- `level` — Integer. HS digit level (only used when `by = "product"`). Default 2.
+- `cache` — Logical. Default `TRUE`.
+
+**Returns**
+
+A data.frame with columns: year, hhi, concentration, n_items, top_item, top_share_pct.
+
+**Example**
+
+```r
+op <- options(comtrade.cache_dir = tempdir())
+
+# Export partner concentration
+ct_hhi("AUS", flow = "X", year = 2023, by = "partner")
+
+# Export product concentration
+ct_hhi("AUS", flow = "X", year = 2023, by = "product")
+
+options(op)
+```
+
+---
+
+## `ct_rca()`
+
+**Revealed Comparative Advantage (Balassa Index)**
+
+Compute the Revealed Comparative Advantage for a country's exports. RCA > 1 indicates the country has a comparative advantage in that product.
+
+**Usage**
+
+```r
+ct_rca(reporter, year = NULL, level = 2L, cache = TRUE)
+```
+
+**Arguments**
+
+- `reporter` — Character. Reporter country ISO3 code.
+- `year` — Integer. Year to query.
+- `level` — Integer. HS digit level: 2, 4, or 6. Default 2.
+- `cache` — Logical. Default `TRUE`.
+
+**Returns**
+
+A data.frame with columns: commodity_code, commodity_desc, reporter_value, world_value, reporter_share, world_share, rca, has_advantage.
+
+**Example**
+
+```r
+op <- options(comtrade.cache_dir = tempdir())
+rca <- ct_rca("AUS", year = 2023)
+# Products where Australia has comparative advantage
+rca[rca$has_advantage, ]
+options(op)
+```
+
+---
+
+## `ct_reporters()`
+
+**List Reporter Countries**
+
+Get the list of countries that report trade data to UN Comtrade, with their ISO3 codes and M49 numeric codes.
+
+**Usage**
+
+```r
+ct_reporters(cache = TRUE)
+```
+
+**Arguments**
+
+- `cache` — Logical. Cache the reference table locally. Default `TRUE`.
+
+**Returns**
+
+A data.frame with columns: codeM49 numeric country code (used in API queries) iso3ISO 3166-1 alpha-3 code (e.g., GBR, USA, AUS) nameCountry name is_groupLogical. TRUE for country groups (e.g., EU, OECD)
+
+**Example**
+
+```r
+op <- options(comtrade.cache_dir = tempdir())
+reporters <- ct_reporters()
+head(reporters)
+options(op)
+```
+
+---
+
+## `ct_services()`
+
+**Get Services Trade Data**
+
+Download international services trade data from the UN Comtrade database using the EBOPS (Extended Balance of Payments Services) classification.
+
+**Usage**
+
+```r
+ct_services(
+  reporter,
+  partner = "0",
+  service = "TOTAL",
+  flow = c("X", "M"),
+  year = NULL,
+  cache = TRUE
+)
+```
+
+**Arguments**
+
+- `reporter` — Character. Reporter country ISO3 code.
+- `partner` — Character. Partner country code. Default `"0"` (World).
+- `service` — Character. EBOPS service code. Default `"TOTAL"`.
+- `flow` — Character. Trade flow: `"X"` (exports), `"M"` (imports). Can be a vector. Default `c("X", "M")`.
+- `year` — Integer. Year(s) to query (2000-present). Default: most recent available year.
+- `cache` — Logical. Cache results locally. Default `TRUE`.
+
+**Returns**
+
+A data.frame with columns: reporter, reporter_desc, partner, partner_desc, flow, flow_desc, service_code, service_desc, year, trade_value_usd.
+
+**Example**
+
+```r
+op <- options(comtrade.cache_dir = tempdir())
+
+# UK services exports to the world
+ct_services("GBR", year = 2022, flow = "X")
+
+options(op)
+```
+
+---
+
+## `ct_set_key()`
+
+**Set the Comtrade API Key**
+
+Store your UN Comtrade API key for the current session. The key is saved as an R option and optionally as an environment variable for persistence.
+
+**Usage**
+
+```r
+ct_set_key(key, install = FALSE)
+```
+
+**Arguments**
+
+- `key` — Character. Your Comtrade API subscription key.
+- `install` — Logical. If `TRUE`, also sets the `COMTRADE_API_KEY` environment variable via `Sys.setenv()`, which persists for the current R session. For permanent storage, add `COMTRADE_API_KEY=your-key` to your `.Renviron` file. Default `FALSE`.
+
+**Returns**
+
+Invisibly returns the key.
+
+**Example**
+
+```r
+ct_set_key("your-subscription-key-here")
+```
+
+---
+
+## `ct_share()`
+
+**World Trade Share**
+
+Compute a country's share of world trade in a given commodity.
+
+**Usage**
+
+```r
+ct_share(reporter, commodity = "TOTAL", flow = "X", year = NULL, cache = TRUE)
+```
+
+**Arguments**
+
+- `reporter` — Character. Reporter country ISO3 code.
+- `commodity` — Character. Commodity code. Default `"TOTAL"`.
+- `flow` — Character. `"X"` or `"M"`. Default `"X"`.
+- `year` — Integer. Year to query.
+- `cache` — Logical. Default `TRUE`.
+
+**Returns**
+
+A data.frame with columns: commodity_code, reporter_value, world_value, share_pct.
+
+**Example**
+
+```r
+op <- options(comtrade.cache_dir = tempdir())
+ct_share("AUS", commodity = "2601", flow = "X", year = 2023)
+options(op)
+```
+
+---
+
+## `ct_top_partners()`
+
+**Top Trading Partners**
+
+Rank a country's trading partners by total trade value.
+
+**Usage**
+
+```r
+ct_top_partners(reporter, flow = "X", year = NULL, n = 20L, cache = TRUE)
+```
+
+**Arguments**
+
+- `reporter` — Character. Reporter country ISO3 code.
+- `flow` — Character. `"X"` for exports, `"M"` for imports. Default `"X"`.
+- `year` — Integer. Year to query.
+- `n` — Integer. Number of top partners to return. Default 20.
+- `cache` — Logical. Default `TRUE`.
+
+**Returns**
+
+A data.frame with columns: partner, partner_desc, value, share_pct, rank.
+
+**Example**
+
+```r
+op <- options(comtrade.cache_dir = tempdir())
+ct_top_partners("GBR", flow = "X", year = 2023)
+options(op)
+```
+
+---
+
+## `ct_top_products()`
+
+**Top Export or Import Products**
+
+Rank a country's traded products by value, showing the top N with percentage shares.
+
+**Usage**
+
+```r
+ct_top_products(
+  reporter,
+  flow = "X",
+  year = NULL,
+  n = 20L,
+  level = 2L,
+  cache = TRUE
+)
+```
+
+**Arguments**
+
+- `reporter` — Character. Reporter country ISO3 code.
+- `flow` — Character. `"X"` for exports, `"M"` for imports.
+- `year` — Integer. Year to query.
+- `n` — Integer. Number of top products to return. Default 20.
+- `level` — Integer. HS digit level: 2, 4, or 6. Default 2.
+- `cache` — Logical. Default `TRUE`.
+
+**Returns**
+
+A data.frame with columns: commodity_code, commodity_desc, value, share_pct, rank.
+
+**Example**
+
+```r
+op <- options(comtrade.cache_dir = tempdir())
+ct_top_products("AUS", flow = "X", year = 2023)
+options(op)
+```
+
+---
+
+## `ct_trade()`
+
+**Get Bilateral Trade Data**
+
+Download merchandise trade data from the UN Comtrade database. Returns bilateral trade flows between reporter and partner countries, optionally filtered by commodity code and trade flow direction.
+
+**Usage**
+
+```r
+ct_trade(
+  reporter,
+  partner = "0",
+  commodity = "TOTAL",
+  flow = c("X", "M"),
+  year = NULL,
+  frequency = "A",
+  classification = "HS",
+  cache = TRUE
+)
+```
+
+**Arguments**
+
+- `reporter` — Character. Reporter country ISO3 code (e.g., `"GBR"`, `"USA"`, `"AUS"`) or numeric M49 code. Use `"all"` for all reporters (limited to 1 per query on the free tier).
+- `partner` — Character. Partner country ISO3 code, or `"0"` / `"W00"` for World (all partners aggregated). Default `"0"` (World).
+- `commodity` — Character. HS commodity code(s). `"TOTAL"` for aggregate trade, `"AG2"` for all 2-digit chapters, or specific codes like `"2709"` (crude petroleum). Default `"TOTAL"`.
+- `flow` — Character. Trade flow: `"X"` (exports), `"M"` (imports), `"RX"` (re-exports), `"RM"` (re-imports). Can be a vector for multiple flows. Default `c("X", "M")`.
+- `year` — Integer. Year(s) to query (1962-present). Can be a vector. Maximum 12-year span per query on the free tier. Default: most recent available year.
+- `frequency` — Character. `"A"` for annual (default), `"M"` for monthly.
+- `classification` — Character. Commodity classification system. Default `"HS"` (latest Harmonized System revision). See `ct_commodities()` for available classifications.
+- `cache` — Logical. Cache results locally for 24 hours. Default `TRUE`.
+
+**Returns**
+
+A data.frame with columns: reporterReporter country code reporter_descReporter country name partnerPartner country code partner_descPartner country name flowTrade flow code (X, M, RX, RM) flow_descTrade flow description commodity_codeCommodity code commodity_descCommodity description yearReference year periodReference period (year or year-month) trade_value_usdTrade value in US dollars net_weight_kgNet weight in kilograms quantityQuantity in supplementary units quantity_unitSupplementary quantity unit
+
+**Example**
+
+```r
+op <- options(comtrade.cache_dir = tempdir())
+
+# UK total exports to the world, 2023
+ct_trade("GBR", year = 2023, flow = "X")
+
+# US imports of crude petroleum from Saudi Arabia
+ct_trade("USA", partner = "SAU", commodity = "2709", flow = "M",
+         year = 2020:2023)
+
+# Australia's top-level trade with China
+ct_trade("AUS", partner = "CHN", year = 2023)
+
+options(op)
+```
+
+---
+
