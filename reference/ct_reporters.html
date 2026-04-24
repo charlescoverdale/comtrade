@@ -75,14 +75,9 @@ with their ISO3 codes and M49 numeric codes.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>comtrade.cache_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">reporters</span> <span class="op">&lt;-</span> <span class="fu">ct_reporters</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in ct_request("public/v1/getDA/C/A/HS", params = list(), require_key = FALSE):</span> Comtrade API error (HTTP 500).</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">reporters</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   code iso3      name is_group</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   36  AUS Australia    FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   40  AUT   Austria    FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   56  BEL   Belgium    FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   76  BRA    Brazil    FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  124  CAN    Canada    FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  156  CHN     China    FALSE</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'reporters' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>

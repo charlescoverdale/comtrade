@@ -41,14 +41,9 @@ A data.frame with columns:
 # \donttest{
 op <- options(comtrade.cache_dir = tempdir())
 reporters <- ct_reporters()
+#> Error in ct_request("public/v1/getDA/C/A/HS", params = list(), require_key = FALSE): Comtrade API error (HTTP 500).
 head(reporters)
-#>   code iso3      name is_group
-#> 1   36  AUS Australia    FALSE
-#> 2   40  AUT   Austria    FALSE
-#> 3   56  BEL   Belgium    FALSE
-#> 4   76  BRA    Brazil    FALSE
-#> 5  124  CAN    Canada    FALSE
-#> 6  156  CHN     China    FALSE
+#> Error: object 'reporters' not found
 options(op)
 # }
 ```
