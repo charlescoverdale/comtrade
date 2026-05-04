@@ -69,6 +69,7 @@ Paul Bochtler through rOpenSci. It wraps the same Comtrade Plus API.
 ## Installation
 
 ``` r
+
 # From CRAN
 install.packages("comtrade")
 
@@ -89,6 +90,7 @@ detailed partner breakdowns), register for a free key at
 calls/day, no cost):
 
 ``` r
+
 library(comtrade)
 ct_set_key("your-subscription-key")
 #> Comtrade API key set for this session.
@@ -104,6 +106,7 @@ pick it up automatically from then on.
 ### Bilateral trade flows
 
 ``` r
+
 library(comtrade)
 
 # UK total exports to the world, 2023
@@ -118,6 +121,7 @@ head(uk)
 ### Top export products
 
 ``` r
+
 # Australia's top 5 exports by HS chapter
 ct_top_products("AUS", flow = "X", year = 2023, n = 5)
 #>   commodity_code      commodity_desc        value share_pct rank
@@ -131,6 +135,7 @@ ct_top_products("AUS", flow = "X", year = 2023, n = 5)
 ### Trade balance
 
 ``` r
+
 # US trade balance with China, 2020-2023
 ct_balance("USA", partner = "CHN", year = 2020:2023)
 #>   partner partner_desc year      exports      imports      balance
@@ -143,6 +148,7 @@ ct_balance("USA", partner = "CHN", year = 2020:2023)
 ### Revealed comparative advantage
 
 ``` r
+
 # Which products does Australia have a comparative advantage in?
 rca <- ct_rca("AUS", year = 2023, level = 2)
 head(rca[rca$has_advantage, ], 5)
@@ -157,6 +163,7 @@ head(rca[rca$has_advantage, ], 5)
 ### Trade concentration (HHI)
 
 ``` r
+
 # How concentrated are Australia's export destinations?
 ct_hhi("AUS", flow = "X", year = 2023, by = "partner")
 #>   year  hhi concentration n_items     top_item top_share_pct
@@ -166,6 +173,7 @@ ct_hhi("AUS", flow = "X", year = 2023, by = "partner")
 ### Trade growth
 
 ``` r
+
 # UK export growth, 2018-2023
 ct_growth("GBR", flow = "X", years = 2018:2023)
 #>   year        value growth_yoy growth_cumulative index_100
@@ -180,6 +188,7 @@ ct_growth("GBR", flow = "X", years = 2018:2023)
 ### Classification concordance
 
 ``` r
+
 # What SITC section does HS chapter 27 (mineral fuels) map to?
 ct_concordance("27", from = "HS", to = "SITC")
 #>   from_code          from_desc to_code       to_desc
@@ -190,34 +199,34 @@ ct_concordance("27", from = "HS", to = "SITC")
 
 ### Data retrieval
 
-| Function                                                                                      | Purpose                                                    |
-|-----------------------------------------------------------------------------------------------|------------------------------------------------------------|
-| [`ct_trade()`](https://charlescoverdale.github.io/comtrade/reference/ct_trade.md)             | Bilateral goods trade flows (200+ countries, 1962-present) |
-| [`ct_services()`](https://charlescoverdale.github.io/comtrade/reference/ct_services.md)       | Services trade via EBOPS classification (2000-present)     |
-| [`ct_reporters()`](https://charlescoverdale.github.io/comtrade/reference/ct_reporters.md)     | List available reporter countries                          |
-| [`ct_commodities()`](https://charlescoverdale.github.io/comtrade/reference/ct_commodities.md) | Search HS commodity codes                                  |
-| [`ct_available()`](https://charlescoverdale.github.io/comtrade/reference/ct_available.md)     | Check data availability for a country                      |
+| Function | Purpose |
+|----|----|
+| [`ct_trade()`](https://charlescoverdale.github.io/comtrade/reference/ct_trade.md) | Bilateral goods trade flows (200+ countries, 1962-present) |
+| [`ct_services()`](https://charlescoverdale.github.io/comtrade/reference/ct_services.md) | Services trade via EBOPS classification (2000-present) |
+| [`ct_reporters()`](https://charlescoverdale.github.io/comtrade/reference/ct_reporters.md) | List available reporter countries |
+| [`ct_commodities()`](https://charlescoverdale.github.io/comtrade/reference/ct_commodities.md) | Search HS commodity codes |
+| [`ct_available()`](https://charlescoverdale.github.io/comtrade/reference/ct_available.md) | Check data availability for a country |
 
 ### Trade analytics
 
-| Function                                                                                        | Purpose                                          |
-|-------------------------------------------------------------------------------------------------|--------------------------------------------------|
-| [`ct_balance()`](https://charlescoverdale.github.io/comtrade/reference/ct_balance.md)           | Trade balance (exports minus imports) by partner |
-| [`ct_top_products()`](https://charlescoverdale.github.io/comtrade/reference/ct_top_products.md) | Top N products by trade value with shares        |
-| [`ct_top_partners()`](https://charlescoverdale.github.io/comtrade/reference/ct_top_partners.md) | Top N trading partners by value with shares      |
-| [`ct_rca()`](https://charlescoverdale.github.io/comtrade/reference/ct_rca.md)                   | Revealed Comparative Advantage (Balassa index)   |
-| [`ct_hhi()`](https://charlescoverdale.github.io/comtrade/reference/ct_hhi.md)                   | Herfindahl-Hirschman concentration index         |
-| [`ct_growth()`](https://charlescoverdale.github.io/comtrade/reference/ct_growth.md)             | Year-on-year and cumulative trade growth         |
-| [`ct_share()`](https://charlescoverdale.github.io/comtrade/reference/ct_share.md)               | Country’s share of world trade                   |
-| [`ct_compare()`](https://charlescoverdale.github.io/comtrade/reference/ct_compare.md)           | Compare multiple countries’ trade                |
+| Function | Purpose |
+|----|----|
+| [`ct_balance()`](https://charlescoverdale.github.io/comtrade/reference/ct_balance.md) | Trade balance (exports minus imports) by partner |
+| [`ct_top_products()`](https://charlescoverdale.github.io/comtrade/reference/ct_top_products.md) | Top N products by trade value with shares |
+| [`ct_top_partners()`](https://charlescoverdale.github.io/comtrade/reference/ct_top_partners.md) | Top N trading partners by value with shares |
+| [`ct_rca()`](https://charlescoverdale.github.io/comtrade/reference/ct_rca.md) | Revealed Comparative Advantage (Balassa index) |
+| [`ct_hhi()`](https://charlescoverdale.github.io/comtrade/reference/ct_hhi.md) | Herfindahl-Hirschman concentration index |
+| [`ct_growth()`](https://charlescoverdale.github.io/comtrade/reference/ct_growth.md) | Year-on-year and cumulative trade growth |
+| [`ct_share()`](https://charlescoverdale.github.io/comtrade/reference/ct_share.md) | Country’s share of world trade |
+| [`ct_compare()`](https://charlescoverdale.github.io/comtrade/reference/ct_compare.md) | Compare multiple countries’ trade |
 
 ### Utilities
 
-| Function                                                                                      | Purpose                                           |
-|-----------------------------------------------------------------------------------------------|---------------------------------------------------|
+| Function | Purpose |
+|----|----|
 | [`ct_concordance()`](https://charlescoverdale.github.io/comtrade/reference/ct_concordance.md) | Convert between HS, SITC, and BEC classifications |
-| [`ct_set_key()`](https://charlescoverdale.github.io/comtrade/reference/ct_set_key.md)         | Store API key                                     |
-| [`ct_cache_clear()`](https://charlescoverdale.github.io/comtrade/reference/ct_cache_clear.md) | Clear cached responses                            |
+| [`ct_set_key()`](https://charlescoverdale.github.io/comtrade/reference/ct_set_key.md) | Store API key |
+| [`ct_cache_clear()`](https://charlescoverdale.github.io/comtrade/reference/ct_cache_clear.md) | Clear cached responses |
 
 ## Caching
 
@@ -229,12 +238,12 @@ are instant and don’t touch the API. The cache directory defaults to
 
 ## Related packages
 
-| Package                                                    | What it covers                                              |
-|------------------------------------------------------------|-------------------------------------------------------------|
-| [`ons`](https://github.com/charlescoverdale/ons)           | UK trade flows (goods exports and imports, current account) |
-| [`hmrc`](https://github.com/charlescoverdale/hmrc)         | UK customs duties and trade tax data                        |
-| [`readoecd`](https://github.com/charlescoverdale/readoecd) | OECD bilateral trade and trade in value added (TiVA)        |
-| [`readecb`](https://github.com/charlescoverdale/readecb)   | Euro area trade balance and external sector statistics      |
+| Package | Description |
+|----|----|
+| [`ons`](https://github.com/charlescoverdale/ons) | UK trade flows (goods exports and imports, current account) |
+| [`readoecd`](https://github.com/charlescoverdale/readoecd) | OECD bilateral trade and trade in value added (TiVA) |
+| [`hmrc`](https://github.com/charlescoverdale/hmrc) | UK customs duties and trade tax data |
+| [`ato`](https://github.com/charlescoverdale/ato) | Australian Taxation Office customs and trade data |
 
 ## Data source
 
