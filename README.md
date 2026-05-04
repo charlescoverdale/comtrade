@@ -173,12 +173,12 @@ Results are cached locally after the first download so repeated calls are instan
 
 ## Related packages
 
-| Package | What it covers |
+| Package | Description |
 |---|---|
 | [`ons`](https://github.com/charlescoverdale/ons) | UK trade flows (goods exports and imports, current account) |
-| [`hmrc`](https://github.com/charlescoverdale/hmrc) | UK customs duties and trade tax data |
 | [`readoecd`](https://github.com/charlescoverdale/readoecd) | OECD bilateral trade and trade in value added (TiVA) |
-| [`readecb`](https://github.com/charlescoverdale/readecb) | Euro area trade balance and external sector statistics |
+| [`hmrc`](https://github.com/charlescoverdale/hmrc) | UK customs duties and trade tax data |
+| [`ato`](https://github.com/charlescoverdale/ato) | Australian Taxation Office customs and trade data |
 
 ## Data source
 
