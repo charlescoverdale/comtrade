@@ -47,13 +47,17 @@ imports, balance.
 ``` r
 # \donttest{
 op <- options(comtrade.cache_dir = tempdir())
-ct_balance("GBR", year = 2023)
+
+# The Comtrade API is rate-limited and can return a non-JSON response
+# under load. tryCatch so the example degrades gracefully if that
+# happens during the CRAN check.
+bal <- tryCatch(ct_balance("GBR", year = 2023), error = function(e) NULL)
 #> ℹ No API key set. Using preview endpoint (500 records max, no descriptions).
 #> ℹ For full access (100k records, descriptions), get a free key at
 #>   <https://comtradedeveloper.un.org/>
 #> ℹ Then run: `ct_set_key("your-key")`
-#>   partner partner_desc year      exports      imports       balance
-#> 1       0        World 2023 231805144781 582770820322 -350965675541
+if (!is.null(bal)) head(bal)
+
 options(op)
 # }
 ```

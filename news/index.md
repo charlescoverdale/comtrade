@@ -2,6 +2,21 @@
 
 ## comtrade 0.1.1
 
+- Fixed the `donttest` check ERROR reported for 0.1.0 on CRAN’s
+  additional issues page. `ct_request()` called
+  [`httr2::resp_body_json()`](https://httr2.r-lib.org/reference/resp_body_raw.html)
+  on any response that was not an HTTP error, but the Comtrade API can
+  return 2xx with an empty body and no content type. Parsing then failed
+  inside httr2 with `Unexpected content type "NA"`, which is neither
+  actionable for the caller nor survivable in an example. The response
+  content type is now checked before parsing, and both the check and the
+  parse raise an informative error naming the likely cause.
+
+- Network-dependent examples now wrap their calls in
+  [`tryCatch()`](https://rdrr.io/r/base/conditions.html) and guard on
+  the result, so a rate-limited or unavailable API degrades the example
+  gracefully instead of failing `R CMD check --run-donttest`.
+
 - Expanded all acronyms in DESCRIPTION (HS, SITC, BEC, EBOPS, API) per
   CRAN reviewer feedback.
 

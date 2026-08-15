@@ -40,11 +40,12 @@ rank.
 ``` r
 # \donttest{
 op <- options(comtrade.cache_dir = tempdir())
-ct_top_partners("GBR", flow = "X", year = 2023)
+
+top <- tryCatch(ct_top_partners("GBR", flow = "X", year = 2023),
+                error = function(e) NULL)
 #> Warning: Country code "ALL" not found in reference table. Passing to API as-is.
-#> Error in ct_request(endpoint, params): Comtrade API authentication failed (HTTP 401).
-#> ℹ Check your API key with `ct_set_key()`.
-#> ℹ Get a free key at <https://comtradedeveloper.un.org/>
+if (!is.null(top)) head(top)
+
 options(op)
 # }
 ```

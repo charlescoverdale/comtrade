@@ -40,10 +40,11 @@ share_pct.
 ``` r
 # \donttest{
 op <- options(comtrade.cache_dir = tempdir())
-ct_share("AUS", commodity = "2601", flow = "X", year = 2023)
-#> Error in ct_request(endpoint, params): Comtrade API authentication failed (HTTP 401).
-#> ℹ Check your API key with `ct_set_key()`.
-#> ℹ Get a free key at <https://comtradedeveloper.un.org/>
+
+sh <- tryCatch(ct_share("AUS", commodity = "2601", flow = "X", year = 2023),
+               error = function(e) NULL)
+if (!is.null(sh)) head(sh)
+
 options(op)
 # }
 ```

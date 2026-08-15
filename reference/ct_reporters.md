@@ -40,8 +40,11 @@ A data.frame with columns:
 ``` r
 # \donttest{
 op <- options(comtrade.cache_dir = tempdir())
-reporters <- ct_reporters()
-head(reporters)
+# The Comtrade API is rate-limited and can return a non-JSON response
+# under load. tryCatch so the example degrades gracefully if that
+# happens during the CRAN check.
+reporters <- tryCatch(ct_reporters(), error = function(e) NULL)
+if (!is.null(reporters)) head(reporters)
 #>   code iso3      name is_group
 #> 1   36  AUS Australia    FALSE
 #> 2   40  AUT   Austria    FALSE

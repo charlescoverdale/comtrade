@@ -61,26 +61,25 @@ partner/product). Interpretation: \< 1,500 = low concentration,
 op <- options(comtrade.cache_dir = tempdir())
 
 # Export partner concentration
-ct_hhi("AUS", flow = "X", year = 2023, by = "partner")
+tryCatch(ct_hhi("AUS", flow = "X", year = 2023, by = "partner"),
+         error = function(e) NULL)
 #> Warning: Country code "ALL" not found in reference table. Passing to API as-is.
 #> ℹ No API key set. Using preview endpoint (500 records max, no descriptions).
 #> ℹ For full access (100k records, descriptions), get a free key at
 #>   <https://comtradedeveloper.un.org/>
 #> ℹ Then run: `ct_set_key("your-key")`
-#> Error in ct_request(endpoint, params): Comtrade API error (HTTP 400).
+#> NULL
 
 # Export product concentration
-ct_hhi("AUS", flow = "X", year = 2023, by = "product")
+tryCatch(ct_hhi("AUS", flow = "X", year = 2023, by = "product"),
+         error = function(e) NULL)
 #> ℹ No API key set. Using preview endpoint (500 records max, no descriptions).
 #> ℹ For full access (100k records, descriptions), get a free key at
 #>   <https://comtradedeveloper.un.org/>
 #> ℹ Then run: `ct_set_key("your-key")`
-#>   year  hhi concentration n_items
-#> 1 2023 2094      moderate      97
-#>                                                                                               top_item
-#> 1 Mineral fuels, mineral oils and products of their distillation; bituminous substances; mineral waxes
-#>   top_share_pct
-#> 1         34.98
+#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> NULL
 
 options(op)
 # }

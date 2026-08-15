@@ -57,14 +57,13 @@ trade_value_usd.
 op <- options(comtrade.cache_dir = tempdir())
 
 # UK services exports to the world
-ct_services("GBR", year = 2022, flow = "X")
+srv <- tryCatch(ct_services("GBR", year = 2022, flow = "X"),
+                error = function(e) NULL)
 #> ℹ No API key set. Using preview endpoint (500 records max, no descriptions).
 #> ℹ For full access (100k records, descriptions), get a free key at
 #>   <https://comtradedeveloper.un.org/>
 #> ℹ Then run: `ct_set_key("your-key")`
-#>  [1] reporterCode reporterDesc partnerCode  partnerDesc  flowCode    
-#>  [6] flowDesc     cmdCode      cmdDesc      refYear      primaryValue
-#> <0 rows> (or 0-length row.names)
+if (!is.null(srv)) head(srv)
 
 options(op)
 # }
