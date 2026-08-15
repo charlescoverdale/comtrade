@@ -46,10 +46,12 @@ partner/product). Interpretation: < 1,500 = low concentration,
 op <- options(comtrade.cache_dir = tempdir())
 
 # Export partner concentration
-ct_hhi("AUS", flow = "X", year = 2023, by = "partner")
+tryCatch(ct_hhi("AUS", flow = "X", year = 2023, by = "partner"),
+         error = function(e) NULL)
 
 # Export product concentration
-ct_hhi("AUS", flow = "X", year = 2023, by = "product")
+tryCatch(ct_hhi("AUS", flow = "X", year = 2023, by = "product"),
+         error = function(e) NULL)
 
 options(op)
 }

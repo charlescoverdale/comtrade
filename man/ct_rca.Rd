@@ -32,9 +32,11 @@ RCA = (country exports of product i / country total exports) /
 \examples{
 \donttest{
 op <- options(comtrade.cache_dir = tempdir())
-rca <- ct_rca("AUS", year = 2023)
+
+rca <- tryCatch(ct_rca("AUS", year = 2023), error = function(e) NULL)
 # Products where Australia has comparative advantage
-rca[rca$has_advantage, ]
+if (!is.null(rca)) rca[rca$has_advantage, ]
+
 options(op)
 }
 }

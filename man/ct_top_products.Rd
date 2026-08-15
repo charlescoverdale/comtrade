@@ -37,7 +37,11 @@ percentage shares.
 \examples{
 \donttest{
 op <- options(comtrade.cache_dir = tempdir())
-ct_top_products("AUS", flow = "X", year = 2023)
+
+top <- tryCatch(ct_top_products("AUS", flow = "X", year = 2023),
+                error = function(e) NULL)
+if (!is.null(top)) head(top)
+
 options(op)
 }
 }

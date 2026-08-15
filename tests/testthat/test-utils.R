@@ -98,3 +98,36 @@ test_that("ct_cache write and read roundtrip works", {
   # Clean up
   file.remove(file.path(tempdir(), "test_roundtrip.rds"))
 })
+
+test_that("ct_request errors informatively on a non-JSON response", {
+  # A 2xx with an empty body and no content type is what the Comtrade API
+  # returned during CRAN's tests-donttest run, and it used to surface as an
+  # httr2 internal error about the content type.
+  no_ctype <- function(req) {
+    httr2::response(status_code = 200L, headers = list(), body = raw())
+  }
+  expect_error(
+    httr2::with_mocked_responses(
+      no_ctype,
+      ct_trade("GBR", year = 2023, flow = "X")
+    ),
+    "non-JSON response"
+  )
+})
+
+test_that("ct_request errors informatively on an unparseable JSON body", {
+  bad_json <- function(req) {
+    httr2::response(
+      status_code = 200L,
+      headers = list(`Content-Type` = "application/json"),
+      body = charToRaw("<html>not json")
+    )
+  }
+  expect_error(
+    httr2::with_mocked_responses(
+      bad_json,
+      ct_trade("GBR", year = 2023, flow = "X")
+    ),
+    "Could not parse"
+  )
+})

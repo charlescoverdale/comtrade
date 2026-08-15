@@ -36,7 +36,11 @@ Compute year-on-year and cumulative trade growth for a bilateral flow.
 \examples{
 \donttest{
 op <- options(comtrade.cache_dir = tempdir())
-ct_growth("GBR", flow = "X", years = 2018:2023)
+
+g <- tryCatch(ct_growth("GBR", flow = "X", years = 2018:2023),
+              error = function(e) NULL)
+if (!is.null(g)) head(g)
+
 options(op)
 }
 }

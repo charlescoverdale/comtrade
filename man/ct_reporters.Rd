@@ -25,8 +25,11 @@ with their ISO3 codes and M49 numeric codes.
 \examples{
 \donttest{
 op <- options(comtrade.cache_dir = tempdir())
-reporters <- ct_reporters()
-head(reporters)
+# The Comtrade API is rate-limited and can return a non-JSON response
+# under load. tryCatch so the example degrades gracefully if that
+# happens during the CRAN check.
+reporters <- tryCatch(ct_reporters(), error = function(e) NULL)
+if (!is.null(reporters)) head(reporters)
 options(op)
 }
 }

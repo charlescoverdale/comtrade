@@ -18,7 +18,13 @@
 #' @examples
 #' \donttest{
 #' op <- options(comtrade.cache_dir = tempdir())
-#' ct_balance("GBR", year = 2023)
+#'
+#' # The Comtrade API is rate-limited and can return a non-JSON response
+#' # under load. tryCatch so the example degrades gracefully if that
+#' # happens during the CRAN check.
+#' bal <- tryCatch(ct_balance("GBR", year = 2023), error = function(e) NULL)
+#' if (!is.null(bal)) head(bal)
+#'
 #' options(op)
 #' }
 ct_balance <- function(reporter, partner = "0", year = NULL, commodity = "TOTAL",
@@ -75,7 +81,11 @@ ct_balance <- function(reporter, partner = "0", year = NULL, commodity = "TOTAL"
 #' @examples
 #' \donttest{
 #' op <- options(comtrade.cache_dir = tempdir())
-#' ct_top_products("AUS", flow = "X", year = 2023)
+#'
+#' top <- tryCatch(ct_top_products("AUS", flow = "X", year = 2023),
+#'                 error = function(e) NULL)
+#' if (!is.null(top)) head(top)
+#'
 #' options(op)
 #' }
 ct_top_products <- function(reporter, flow = "X", year = NULL, n = 20L,
@@ -134,7 +144,11 @@ ct_top_products <- function(reporter, flow = "X", year = NULL, n = 20L,
 #' @examples
 #' \donttest{
 #' op <- options(comtrade.cache_dir = tempdir())
-#' ct_top_partners("GBR", flow = "X", year = 2023)
+#'
+#' top <- tryCatch(ct_top_partners("GBR", flow = "X", year = 2023),
+#'                 error = function(e) NULL)
+#' if (!is.null(top)) head(top)
+#'
 #' options(op)
 #' }
 ct_top_partners <- function(reporter, flow = "X", year = NULL, n = 20L,
@@ -195,9 +209,11 @@ ct_top_partners <- function(reporter, flow = "X", year = NULL, n = 20L,
 #' @examples
 #' \donttest{
 #' op <- options(comtrade.cache_dir = tempdir())
-#' rca <- ct_rca("AUS", year = 2023)
+#'
+#' rca <- tryCatch(ct_rca("AUS", year = 2023), error = function(e) NULL)
 #' # Products where Australia has comparative advantage
-#' rca[rca$has_advantage, ]
+#' if (!is.null(rca)) rca[rca$has_advantage, ]
+#'
 #' options(op)
 #' }
 ct_rca <- function(reporter, year = NULL, level = 2L, cache = TRUE) {
@@ -284,10 +300,12 @@ ct_rca <- function(reporter, year = NULL, level = 2L, cache = TRUE) {
 #' op <- options(comtrade.cache_dir = tempdir())
 #'
 #' # Export partner concentration
-#' ct_hhi("AUS", flow = "X", year = 2023, by = "partner")
+#' tryCatch(ct_hhi("AUS", flow = "X", year = 2023, by = "partner"),
+#'          error = function(e) NULL)
 #'
 #' # Export product concentration
-#' ct_hhi("AUS", flow = "X", year = 2023, by = "product")
+#' tryCatch(ct_hhi("AUS", flow = "X", year = 2023, by = "product"),
+#'          error = function(e) NULL)
 #'
 #' options(op)
 #' }
@@ -359,7 +377,11 @@ ct_hhi <- function(reporter, flow = "X", year = NULL, by = "partner",
 #' @examples
 #' \donttest{
 #' op <- options(comtrade.cache_dir = tempdir())
-#' ct_growth("GBR", flow = "X", years = 2018:2023)
+#'
+#' g <- tryCatch(ct_growth("GBR", flow = "X", years = 2018:2023),
+#'               error = function(e) NULL)
+#' if (!is.null(g)) head(g)
+#'
 #' options(op)
 #' }
 ct_growth <- function(reporter, partner = "0", commodity = "TOTAL",
@@ -416,7 +438,11 @@ ct_growth <- function(reporter, partner = "0", commodity = "TOTAL",
 #' @examples
 #' \donttest{
 #' op <- options(comtrade.cache_dir = tempdir())
-#' ct_share("AUS", commodity = "2601", flow = "X", year = 2023)
+#'
+#' sh <- tryCatch(ct_share("AUS", commodity = "2601", flow = "X", year = 2023),
+#'                error = function(e) NULL)
+#' if (!is.null(sh)) head(sh)
+#'
 #' options(op)
 #' }
 ct_share <- function(reporter, commodity = "TOTAL", flow = "X",

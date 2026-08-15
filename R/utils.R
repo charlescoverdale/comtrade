@@ -131,7 +131,29 @@ ct_request <- function(endpoint, params = list(), require_key = TRUE) {
     cli::cli_abort("Comtrade API error (HTTP {status}).")
   }
 
-  body <- httr2::resp_body_json(resp)
+  # A 2xx response is not a guarantee of JSON: the API (or an intermediary)
+  # can return an empty body with no content type, in which case
+  # resp_body_json() aborts with an httr2 internal error about the content
+  # type rather than something the caller can act on.
+  ctype <- httr2::resp_content_type(resp)
+  if (is.na(ctype) || !grepl("json", ctype, fixed = TRUE)) {
+    cli::cli_abort(c(
+      "Comtrade API returned a non-JSON response (HTTP {status}).",
+      "i" = "Content type: {if (is.na(ctype)) 'none' else ctype}.",
+      "i" = "This is usually a transient API problem. Try again shortly."
+    ))
+  }
+
+  body <- tryCatch(
+    httr2::resp_body_json(resp),
+    error = function(e) {
+      cli::cli_abort(c(
+        "Could not parse the Comtrade API response as JSON.",
+        "i" = "This is usually a transient API problem. Try again shortly.",
+        "i" = "Original error: {conditionMessage(e)}"
+      ))
+    }
+  )
 
   if (!is.null(body$statusCode) && body$statusCode != 0L) {
     msg <- body$message %||% "Unknown API error"

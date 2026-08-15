@@ -11,6 +11,7 @@ Download and analyse international merchandise and services trade data from the 
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://charlescoverdale.github.io/comtrade/}
   \item \url{https://github.com/charlescoverdale/comtrade}
   \item Report bugs at \url{https://github.com/charlescoverdale/comtrade/issues}
 }

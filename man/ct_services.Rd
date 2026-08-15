@@ -42,7 +42,9 @@ using the EBOPS (Extended Balance of Payments Services) classification.
 op <- options(comtrade.cache_dir = tempdir())
 
 # UK services exports to the world
-ct_services("GBR", year = 2022, flow = "X")
+srv <- tryCatch(ct_services("GBR", year = 2022, flow = "X"),
+                error = function(e) NULL)
+if (!is.null(srv)) head(srv)
 
 options(op)
 }

@@ -27,7 +27,11 @@ Rank a country's trading partners by total trade value.
 \examples{
 \donttest{
 op <- options(comtrade.cache_dir = tempdir())
-ct_top_partners("GBR", flow = "X", year = 2023)
+
+top <- tryCatch(ct_top_partners("GBR", flow = "X", year = 2023),
+                error = function(e) NULL)
+if (!is.null(top)) head(top)
+
 options(op)
 }
 }

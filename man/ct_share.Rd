@@ -27,7 +27,11 @@ Compute a country's share of world trade in a given commodity.
 \examples{
 \donttest{
 op <- options(comtrade.cache_dir = tempdir())
-ct_share("AUS", commodity = "2601", flow = "X", year = 2023)
+
+sh <- tryCatch(ct_share("AUS", commodity = "2601", flow = "X", year = 2023),
+               error = function(e) NULL)
+if (!is.null(sh)) head(sh)
+
 options(op)
 }
 }

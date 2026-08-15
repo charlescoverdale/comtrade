@@ -18,8 +18,11 @@
 #' @examples
 #' \donttest{
 #' op <- options(comtrade.cache_dir = tempdir())
-#' reporters <- ct_reporters()
-#' head(reporters)
+#' # The Comtrade API is rate-limited and can return a non-JSON response
+#' # under load. tryCatch so the example degrades gracefully if that
+#' # happens during the CRAN check.
+#' reporters <- tryCatch(ct_reporters(), error = function(e) NULL)
+#' if (!is.null(reporters)) head(reporters)
 #' options(op)
 #' }
 ct_reporters <- function(cache = TRUE) {
@@ -120,7 +123,8 @@ ct_commodities <- function(query = NULL, level = NULL) {
 #' @examples
 #' \donttest{
 #' op <- options(comtrade.cache_dir = tempdir())
-#' ct_available("GBR")
+#' avail <- tryCatch(ct_available("GBR"), error = function(e) NULL)
+#' if (!is.null(avail)) head(avail)
 #' options(op)
 #' }
 ct_available <- function(reporter, cache = TRUE) {

@@ -35,7 +35,13 @@ against each trading partner.
 \examples{
 \donttest{
 op <- options(comtrade.cache_dir = tempdir())
-ct_balance("GBR", year = 2023)
+
+# The Comtrade API is rate-limited and can return a non-JSON response
+# under load. tryCatch so the example degrades gracefully if that
+# happens during the CRAN check.
+bal <- tryCatch(ct_balance("GBR", year = 2023), error = function(e) NULL)
+if (!is.null(bal)) head(bal)
+
 options(op)
 }
 }

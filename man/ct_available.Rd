@@ -22,7 +22,8 @@ reporter country.
 \examples{
 \donttest{
 op <- options(comtrade.cache_dir = tempdir())
-ct_available("GBR")
+avail <- tryCatch(ct_available("GBR"), error = function(e) NULL)
+if (!is.null(avail)) head(avail)
 options(op)
 }
 }
