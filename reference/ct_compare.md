@@ -37,14 +37,16 @@ balance, rca.
 ``` r
 # \donttest{
 op <- options(comtrade.cache_dir = tempdir())
-ct_compare(c("GBR", "DEU", "FRA"), commodity = "87", year = 2023)
+
+cmp <- tryCatch(ct_compare(c("GBR", "DEU", "FRA"), commodity = "87",
+                           year = 2023),
+                error = function(e) NULL)
 #> ℹ No API key set. Using preview endpoint (500 records max, no descriptions).
 #> ℹ For full access (100k records, descriptions), get a free key at
 #>   <https://comtradedeveloper.un.org/>
 #> ℹ Then run: `ct_set_key("your-key")`
-#> Error in ct_request(endpoint, params): Comtrade API returned a non-JSON response (HTTP 200).
-#> ℹ Content type: none.
-#> ℹ This is usually a transient API problem. Try again shortly.
+if (!is.null(cmp)) head(cmp)
+
 options(op)
 # }
 ```
