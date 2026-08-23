@@ -26,7 +26,12 @@ imports, balance, and revealed comparative advantage.
 \examples{
 \donttest{
 op <- options(comtrade.cache_dir = tempdir())
-ct_compare(c("GBR", "DEU", "FRA"), commodity = "87", year = 2023)
+
+cmp <- tryCatch(ct_compare(c("GBR", "DEU", "FRA"), commodity = "87",
+                           year = 2023),
+                error = function(e) NULL)
+if (!is.null(cmp)) head(cmp)
+
 options(op)
 }
 }
