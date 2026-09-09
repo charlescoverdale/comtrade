@@ -1,4 +1,22 @@
-# CRAN submission comments — comtrade 0.1.1
+# CRAN submission comments - comtrade 0.1.1
+
+## Resubmission
+
+This is a resubmission of comtrade 0.1.1, addressing Uwe Ligges' review
+comment of 2026-09-09.
+
+The README linked <https://comtradeapi.un.org/> as the API home. That
+host serves the API endpoints but returns 404 at its root, so it is not
+checkable. The link is removed. The sentence now points to the UN
+Comtrade developer portal <https://comtradedeveloper.un.org/>, which is
+where API keys are actually issued and which returns 200. That URL was
+already cited in DESCRIPTION, so nothing new is introduced.
+
+Every other URL in the package documentation was re-verified: all 200.
+
+No code changed. `ct_base_url()` still targets `comtradeapi.un.org`
+because that is the live API host; only the documentation reference was
+at fault.
 
 ## Reason for this submission
 
