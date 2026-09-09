@@ -248,9 +248,10 @@ are instant and don’t touch the API. The cache directory defaults to
 ## Data source
 
 All data comes from the [United Nations
-Comtrade](https://comtradeplus.un.org/) database via the [Comtrade Plus
-API](https://comtradeapi.un.org/). This package is not affiliated with
-or endorsed by the United Nations.
+Comtrade](https://comtradeplus.un.org/) database via the Comtrade Plus
+API. API keys are issued through the [UN Comtrade developer
+portal](https://comtradedeveloper.un.org/). This package is not
+affiliated with or endorsed by the United Nations.
 
 ## Issues
 

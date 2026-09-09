@@ -58,6 +58,8 @@ g <- tryCatch(ct_growth("GBR", flow = "X", years = 2018:2023),
 #> ℹ For full access (100k records, descriptions), get a free key at
 #>   <https://comtradedeveloper.un.org/>
 #> ℹ Then run: `ct_set_key("your-key")`
+#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 if (!is.null(g)) head(g)
 
 options(op)

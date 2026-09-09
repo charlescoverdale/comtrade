@@ -68,8 +68,6 @@ tryCatch(ct_hhi("AUS", flow = "X", year = 2023, by = "partner"),
 #> ℹ For full access (100k records, descriptions), get a free key at
 #>   <https://comtradedeveloper.un.org/>
 #> ℹ Then run: `ct_set_key("your-key")`
-#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■                 
-#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> NULL
 
 # Export product concentration
@@ -79,6 +77,8 @@ tryCatch(ct_hhi("AUS", flow = "X", year = 2023, by = "product"),
 #> ℹ For full access (100k records, descriptions), get a free key at
 #>   <https://comtradedeveloper.un.org/>
 #> ℹ Then run: `ct_set_key("your-key")`
+#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> NULL
 
 options(op)
