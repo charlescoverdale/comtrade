@@ -179,6 +179,7 @@ Results are cached locally after the first download so repeated calls are instan
 | [`readoecd`](https://github.com/charlescoverdale/readoecd) | OECD bilateral trade and trade in value added (TiVA) |
 | [`hmrc`](https://github.com/charlescoverdale/hmrc) | UK customs duties and trade tax data |
 | [`ato`](https://github.com/charlescoverdale/ato) | Australian Taxation Office customs and trade data |
+| [`readimf`](https://github.com/charlescoverdale/readimf) | IMF Direction of Trade Statistics (bilateral goods trade) |
 
 ## Data source
 
