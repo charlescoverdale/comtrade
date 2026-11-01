@@ -64,6 +64,9 @@ srv <- tryCatch(ct_services("GBR", year = 2022, flow = "X"),
 #>   <https://comtradedeveloper.un.org/>
 #> ℹ Then run: `ct_set_key("your-key")`
 if (!is.null(srv)) head(srv)
+#>  [1] reporterCode reporterDesc partnerCode  partnerDesc  flowCode    
+#>  [6] flowDesc     cmdCode      cmdDesc      refYear      primaryValue
+#> <0 rows> (or 0-length row.names)
 
 options(op)
 # }

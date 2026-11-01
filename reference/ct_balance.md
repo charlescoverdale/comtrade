@@ -57,6 +57,8 @@ bal <- tryCatch(ct_balance("GBR", year = 2023), error = function(e) NULL)
 #>   <https://comtradedeveloper.un.org/>
 #> ℹ Then run: `ct_set_key("your-key")`
 if (!is.null(bal)) head(bal)
+#>   partner partner_desc year      exports      imports     balance
+#> 1       0        World 2023 521207222955 791657207072 -2.7045e+11
 
 options(op)
 # }

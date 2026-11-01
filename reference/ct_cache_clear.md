@@ -19,7 +19,7 @@ directory existed.
 # \donttest{
 op <- options(comtrade.cache_dir = tempdir())
 ct_cache_clear()
-#> Cleared 1 cached file.
+#> Cleared 2 cached files.
 options(op)
 # }
 ```

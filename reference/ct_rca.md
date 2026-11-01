@@ -52,6 +52,9 @@ rca <- tryCatch(ct_rca("AUS", year = 2023), error = function(e) NULL)
 #> ℹ Then run: `ct_set_key("your-key")`
 # Products where Australia has comparative advantage
 if (!is.null(rca)) rca[rca$has_advantage, ]
+#> [1] commodity_code commodity_desc reporter_value world_value    reporter_share
+#> [6] world_share    rca            has_advantage 
+#> <0 rows> (or 0-length row.names)
 
 options(op)
 # }

@@ -2,6 +2,8 @@
 
 ## comtrade 0.1.1
 
+CRAN release: 2026-09-09
+
 - Fixed the `donttest` check ERROR reported for 0.1.0 on CRAN’s
   additional issues page. `ct_request()` called
   [`httr2::resp_body_json()`](https://httr2.r-lib.org/reference/resp_body_raw.html)

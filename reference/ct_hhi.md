@@ -68,6 +68,8 @@ tryCatch(ct_hhi("AUS", flow = "X", year = 2023, by = "partner"),
 #> ℹ For full access (100k records, descriptions), get a free key at
 #>   <https://comtradedeveloper.un.org/>
 #> ℹ Then run: `ct_set_key("your-key")`
+#> Waiting 3s for retry backoff ■■■■■■■■■■■■■■                  
+#> Waiting 3s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> NULL
 
 # Export product concentration
@@ -77,9 +79,14 @@ tryCatch(ct_hhi("AUS", flow = "X", year = 2023, by = "product"),
 #> ℹ For full access (100k records, descriptions), get a free key at
 #>   <https://comtradedeveloper.un.org/>
 #> ℹ Then run: `ct_set_key("your-key")`
-#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■                 
-#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> NULL
+#> Waiting 3s for retry backoff ■■■■■■■■■■■■                    
+#> Waiting 3s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#>   year  hhi concentration n_items
+#> 1 2023 2094      moderate      97
+#>                                                                                               top_item
+#> 1 Mineral fuels, mineral oils and products of their distillation; bituminous substances; mineral waxes
+#>   top_share_pct
+#> 1         34.98
 
 options(op)
 # }
