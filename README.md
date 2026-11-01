@@ -130,8 +130,8 @@ ct_growth("GBR", flow = "X", years = 2018:2023)
 ```r
 # What SITC section does HS chapter 27 (mineral fuels) map to?
 ct_concordance("27", from = "HS", to = "SITC")
-#>   from_code          from_desc to_code       to_desc
-#>          27 Mineral fuels, oils       3 Mineral fuels
+#>  from_code           from_desc to_code       to_desc
+#>         27 Mineral fuels, oils       3 Mineral fuels
 ```
 
 ## Functions
