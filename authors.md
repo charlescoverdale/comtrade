@@ -10,13 +10,13 @@ Source:
 [`DESCRIPTION`](https://github.com/charlescoverdale/comtrade/blob/main/DESCRIPTION)
 
 Coverdale C (2026). *comtrade: Access and Analyse UN Comtrade
-International Trade Data*. R package version 0.1.1,
+International Trade Data*. R package version 0.1.1.9000,
 <https://charlescoverdale.github.io/comtrade/>.
 
     @Manual{,
       title = {comtrade: Access and Analyse UN Comtrade International Trade Data},
       author = {Charles Coverdale},
       year = {2026},
-      note = {R package version 0.1.1},
+      note = {R package version 0.1.1.9000},
       url = {https://charlescoverdale.github.io/comtrade/},
     }

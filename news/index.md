@@ -1,5 +1,16 @@
 # Changelog
 
+## comtrade (development version)
+
+- Requests to the Comtrade API now time out instead of hanging. httr2
+  sets no transfer timeout, so a server that accepted the connection and
+  then stopped sending stalled the session indefinitely. Every request
+  now aborts if the connection takes over 20 seconds to open or the
+  transfer moves under 1 byte per second for 60 seconds, and surfaces as
+  the usual “Failed to connect to the Comtrade API” error. Set
+  `options(comtrade.timeout = <seconds>)` for a hard cap on the whole
+  request.
+
 ## comtrade 0.1.1
 
 CRAN release: 2026-09-09

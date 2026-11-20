@@ -50,6 +50,8 @@ rca <- tryCatch(ct_rca("AUS", year = 2023), error = function(e) NULL)
 #> ℹ For full access (100k records, descriptions), get a free key at
 #>   <https://comtradedeveloper.un.org/>
 #> ℹ Then run: `ct_set_key("your-key")`
+#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 # Products where Australia has comparative advantage
 if (!is.null(rca)) rca[rca$has_advantage, ]
 #> [1] commodity_code commodity_desc reporter_value world_value    reporter_share

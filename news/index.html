@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">comtrade</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,10 @@
       <small>Source: <a href="https://github.com/charlescoverdale/comtrade/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="development version" id="comtrade-development-version">comtrade (development version)<a class="anchor" aria-label="anchor" href="#comtrade-development-version"></a></h2>
+<ul><li>Requests to the Comtrade API now time out instead of hanging. httr2 sets no transfer timeout, so a server that accepted the connection and then stopped sending stalled the session indefinitely. Every request now aborts if the connection takes over 20 seconds to open or the transfer moves under 1 byte per second for 60 seconds, and surfaces as the usual “Failed to connect to the Comtrade API” error. Set <code>options(comtrade.timeout = &lt;seconds&gt;)</code> for a hard cap on the whole request.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.1" id="comtrade-011">comtrade 0.1.1<a class="anchor" aria-label="anchor" href="#comtrade-011"></a></h2><p class="text-muted">CRAN release: 2026-09-09</p>
 <ul><li><p>Fixed the <code>donttest</code> check ERROR reported for 0.1.0 on CRAN’s additional issues page. <code>ct_request()</code> called <code><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">httr2::resp_body_json()</a></code> on any response that was not an HTTP error, but the Comtrade API can return 2xx with an empty body and no content type. Parsing then failed inside httr2 with <code>Unexpected content type "NA"</code>, which is neither actionable for the caller nor survivable in an example. The response content type is now checked before parsing, and both the check and the parse raise an informative error naming the likely cause.</p></li>
