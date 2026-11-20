@@ -131,3 +131,35 @@ test_that("ct_request errors informatively on an unparseable JSON body", {
     "Could not parse"
   )
 })
+
+test_that("ct_build_request sets connect and stall timeouts", {
+  op <- options(comtrade.timeout = NULL)
+  on.exit(options(op), add = TRUE)
+  req <- comtrade:::ct_build_request("https://comtradeapi.un.org/public/v1/x")
+  expect_equal(req$options$connecttimeout, 20L)
+  expect_equal(req$options$low_speed_limit, 1L)
+  expect_equal(req$options$low_speed_time, 60L)
+  expect_null(req$options$timeout_ms)
+})
+
+test_that("comtrade.timeout adds a hard cap and is validated", {
+  op <- options(comtrade.timeout = 90)
+  on.exit(options(op), add = TRUE)
+  req <- comtrade:::ct_build_request("https://comtradeapi.un.org/public/v1/x")
+  expect_equal(req$options$timeout_ms, 90000)
+
+  options(comtrade.timeout = "soon")
+  expect_error(comtrade:::ct_build_request("https://example.org"), "comtrade.timeout")
+})
+
+test_that("a stalled transfer surfaces as the informative connection error", {
+  httr2::local_mocked_responses(function(req) {
+    stop("Timeout was reached [comtradeapi.un.org]: Operation too slow")
+  })
+  expect_error(
+    suppressMessages(
+      comtrade:::ct_request("public/v1/getDA/C/A/HS", require_key = FALSE)
+    ),
+    "Failed to connect to the Comtrade API"
+  )
+})

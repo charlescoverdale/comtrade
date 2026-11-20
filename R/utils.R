@@ -64,6 +64,37 @@ ct_cache_write <- function(key, data) {
   )
 }
 
+#' Build a request to the Comtrade API with stall protection
+#'
+#' httr2 sets no transfer timeout, so a server that accepts the connection
+#' and then stops sending would hang the session indefinitely. These
+#' options abort a connection that takes over 20 seconds to open, or a
+#' transfer that moves under 1 byte per second for 60 seconds, while
+#' letting a slow but progressing download finish. Set the
+#' `comtrade.timeout` option to a number of seconds for a hard cap on the
+#' whole request as well.
+#' @param url Character. The full request URL.
+#' @return An httr2 request.
+#' @noRd
+ct_build_request <- function(url) {
+  req <- httr2::request(url)
+  req <- httr2::req_options(
+    req,
+    connecttimeout = 20L,
+    low_speed_limit = 1L,
+    low_speed_time = 60L
+  )
+  timeout <- getOption("comtrade.timeout", default = NULL)
+  if (!is.null(timeout)) {
+    if (!is.numeric(timeout) || length(timeout) != 1L || is.na(timeout) ||
+        timeout <= 0) {
+      cli::cli_abort("Option {.code comtrade.timeout} must be a single positive number of seconds.")
+    }
+    req <- httr2::req_timeout(req, timeout)
+  }
+  req
+}
+
 #' Perform a Comtrade API request
 #' @param endpoint API endpoint path
 #' @param params Named list of query parameters
@@ -87,7 +118,7 @@ ct_request <- function(endpoint, params = list(), require_key = TRUE) {
 
   url <- paste0(ct_base_url(), "/", endpoint)
 
-  req <- httr2::request(url)
+  req <- ct_build_request(url)
   req <- httr2::req_url_query(req, !!!params)
 
   if (!is.null(key)) {
